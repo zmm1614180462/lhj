@@ -6,7 +6,7 @@
 <div class="weui_cells weui_cells_access">
     @foreach($products as $product)
     <a class="weui_cell" href="/product/{{$product->id}}">
-        <div class="weui_cell_hd"><img class="bk_preview" src="{{$product->preview}}"></div>
+        <div class="weui_cell_hd"><img class="bk_preview" src="/public{{$product->preview}}"></div>
         <div class="weui_cell_bd weui_cell_primary">
           <div style="margin-bottom: 10px;">
             <span class="bk_title">{{$product->name}}</span>

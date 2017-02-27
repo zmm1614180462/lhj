@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', '1614180462@qq.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'magina@yinnote.com', 'name' => '凯恩书店'],
+    'from' => ['address' => 'magina@yinnote.com', 'name' => 'lhj'],
 
     /*
     |--------------------------------------------------------------------------

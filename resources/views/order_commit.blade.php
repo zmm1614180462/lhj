@@ -8,7 +8,7 @@
         @foreach($cart_items as $cart_item)
         <div class="weui_cell">
             <div class="weui_cell_hd">
-              <img src="{{$cart_item->product->preview}}" alt="" class="bk_icon">
+              <img src="/public{{$cart_item->product->preview}}" alt="" class="bk_icon">
             </div>
             <div class="weui_cell_bd weui_cell_primary">
                 <p class="bk_summary">{{$cart_item->product->name}}</p>
@@ -51,7 +51,7 @@
   </div>
   <div class="bk_fix_bottom">
     <div class="bk_btn_area">
-      <button class="weui_btn weui_btn_primary" onclick="_onPay();">提交订单</button>
+      <button class="weui_btn weui_btn_primary" onclick="onPay();">提交订单</button>
     </div>
   </div>
 
@@ -59,8 +59,8 @@
 
 @section('my-js')
     <script>
-        function _onPay() {
-            
-        }
+      function onPay() {
+
+      }
     </script>
 @endsection

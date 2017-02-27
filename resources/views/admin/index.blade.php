@@ -1,7 +1,7 @@
 @extends('admin.master')
 
 @section('content')
-<header class="Hui-header cl"><a class="Hui-logo l" title="凯恩书店" href="/admin/index">凯恩书店</a><span class="Hui-subtitle l">后台</span>
+<header class="Hui-header cl"><a class="Hui-logo l" title="凯恩书店" href="/admin/index">商城网站</a><span class="Hui-subtitle l">后台</span>
 	<ul class="Hui-userbar">
 		<li>{{$admin->username}}</li>
 		<li><a href="/admin/exit">退出</a></li>

@@ -16,14 +16,8 @@ class OrderController extends Controller
 {
   public function toOrderCommit(Request $request)
   {
+
     // 获取微信重定向返回的code
-    $code = $request->input('code', '');
-    if($code != '') {
-      //获取code码，以获取openid
-      $openid = WXTool::getOpenid($code);
-      // 将openid保存到session
-      $request->session()->put('openid', $openid);
-    }
 
     $product_ids = $request->input('product_ids', '');
 
@@ -63,26 +57,13 @@ class OrderController extends Controller
     $order->order_no = 'E'.time().''.$order->id;
     $order->save();
 
-    // JSSDK 相关
-    $access_token = WXTool::getAccessToken();
-    $jsapi_ticket = WXTool::getJsApiTicket($access_token);
-    $noncestr = WXTool::createNonceStr();
-    $timestamp = time();
-    $url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
-    // 签名
-    $signature = WXTool::signature($jsapi_ticket, $noncestr, $timestamp, $url);
-    // 返回微信参数
-    $bk_wx_js_config = new BKWXJsConfig;
-    $bk_wx_js_config->appId = config('wx_config.APPID');
-    $bk_wx_js_config->timestamp = $timestamp;
-    $bk_wx_js_config->nonceStr = $noncestr;
-    $bk_wx_js_config->signature = $signature;
+
 
     return view('order_commit')->with('cart_items', $cart_items_arr)
                                ->with('total_price', $total_price)
                                ->with('name', $name)
                                ->with('order_no', $order->order_no)
-                               ->with('bk_wx_js_config', $bk_wx_js_config);
+                               ;
   }
 
   public function toOrderList(Request $request)

@@ -7,13 +7,14 @@
   {{-- <link rel="stylesheet" href="/css/weui.css">
   <link rel="stylesheet" href="/css/book.css">
   <link rel="stylesheet" href="/css/swipe.css"> --}}
-  <link rel="stylesheet" href="http://bucket.yinnote.com/book/book.min.css">
+    {{--<link rel="stylesheet" href="http://bucket.yinnote.com/book/book.min.css">--}}
+    <link rel="stylesheet" href="{{url('public/build/book.min.css')}}">
 </head>
 <body>
 <div class="bk_title_bar">
-  <img class="bk_back" src="http://bucket.yinnote.com/book/images/back.png" alt="" onclick="history.go(-1);">
+  <img class="bk_back" src="{{url('public/images/back.png')}}" alt="" onclick="history.go(-1);">
   <p class="bk_title_content"></p>
-  <img class="bk_menu" src="http://bucket.yinnote.com/book/images/menu.png" alt="" onclick="onMenuClick();">
+  <img class="bk_menu" src="{{url('public/images/menu.png')}}" alt="" onclick="onMenuClick();">
 </div>
 
 
@@ -41,10 +42,10 @@
 </div>
 
 </body>
-{{-- <script src="/js/jquery-1.11.2.min.js"></script>
-<script src="/js/swipe.min.js" charset="utf-8"></script>
-<script src="/js/book.js" charset="utf-8"></script> --}}
-<script src="http://bucket.yinnote.com/book/book.min.js" charset="utf-8"></script>
+<script src="/public/js/jquery-1.11.2.min.js"></script>
+<script src="/public/js/swipe.min.js" charset="utf-8"></script>
+<script src="/public/js/book.js" charset="utf-8"></script>
+{{--<script src="/public/js/book.min.js" charset="utf-8"></script>--}}
 
 @yield('my-js')
 </html>
