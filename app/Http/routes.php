@@ -23,30 +23,21 @@ Route::get('/register', 'View\MemberController@toRegister');
 //Route::get('/category', 'View\BookController@toCategory');
 Route::get('/product/category_id/{category_id}', 'View\BookController@toProduct');
 Route::get('/product/{product_id}', 'View\BookController@toPdtContent');
-
-Route::get('/cart', 'View\CartController@toCart');
+//'middleware'=>'check.cart'
+Route::get('/cart','View\CartController@toCart')->middleware('check.cart');
 
 Route::group(['prefix' => 'service'], function () {
   Route::get('validate_code/create', 'Service\ValidateController@create');
-  Route::post('validate_phone/send', 'Service\ValidateController@sendSMS');
   Route::post('upload/{type}', 'Service\UploadController@uploadFile');
 
   Route::post('register', 'Service\MemberController@register');
   Route::post('login', 'Service\MemberController@login');
-    Route::any('logout', 'Service\MemberController@logout');
+  Route::any('logout', 'Service\MemberController@logout');
 
   Route::get('category/parent_id/{parent_id}', 'Service\BookController@getCategoryByParentId');
   Route::get('cart/add/{product_id}', 'Service\CartController@addCart');
   Route::get('cart/delete', 'Service\CartController@deleteCart');
 
-//  Route::post('alipay', 'Service\PayController@aliPay');
-//  Route::post('wxpay', 'Service\PayController@wxPay');
-//
-//  Route::post('pay/ali_notify', 'Service\PayController@aliNotify');
-//  Route::get('pay/ali_result', 'Service\PayController@aliResult');
-//  Route::get('pay/ali_merchant', 'Service\PayController@aliMerchant');
-//
-//  Route::post('pay/wx_notify', 'Service\PayController@wxNotify');
 });
 
 

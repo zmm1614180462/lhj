@@ -15,6 +15,6 @@ class MemberController extends Controller
 
   public function toRegister($value='')
   {
-    return view('register');
+    return view('mi/login');
   }
 }

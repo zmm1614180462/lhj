@@ -110,6 +110,11 @@
             color: inherit;
             text-decoration: none;
         }
+        .warning{
+            padding-top:10px;
+            color:red;
+            display: none;
+        }
     </style>
     <script src="{{url('public/js/jquery-1.11.2.min.js')}}"></script>
 </head>
@@ -122,10 +127,10 @@
     <div class="body">
         <div class="nav-tab">
             <div class="nav-slider">
-                <a href="#signup" class="active">注册</a>
+                <a href="#signup">注册</a>
 
-                <a href="#signin" >登录</a>
-                <span class="nav-slider-bar"></span>
+                <a href="#signin" class="active" >登录</a>
+                <span class="nav-slider-bar" style="left: 4em"></span>
             </div>
         </div>
         <div class="signup">
@@ -154,6 +159,7 @@
                         <img  height="46" src="/service/validate_code/create" alt="">
                     </span>
                 </div>
+                <p class="warning">用户名或密码不正确</p>
                 <button id='login' type="submit">登录</button>
                 <div class="signin-other">
                     <input type="checkbox" id="remember-me">
@@ -171,6 +177,8 @@
     var navSliderBar = navSlider.getElementsByClassName("nav-slider-bar")[0];
     var signup = document.getElementsByClassName("signup")[0];
     var signin = document.getElementsByClassName("signin")[0];
+    signup.style.display = "none";
+    signin.style.display = "block";
 
     navSliderA[0].onclick = function () {
         navSliderBar.style.left = "0";
@@ -187,6 +195,7 @@
         signup.style.display = "none";
         signin.style.display = "block";
        $('.vaildate').find('img').attr('src','/service/validate_code/create?'+new Date().getTime())
+       $('.warning').css('display','none')
     }
 </script>
 <script>
@@ -229,6 +238,46 @@ $('#register').on('click',function (ev) {
 //登录
 $('#login').on('click',function (ev) {
     ev.stopPropagation();
+    var username =  $('.login').find('input[name=username]').val();
+    var password =  $('.login').find('input[name=password]').val()
+    var validate_code =  $('.login').find('input[name=validate_code]').val()
+    if(!username){
+        $('.warning').css('display','block');
+        $('.warning').html('用户名不能为空');
+        return
+    }
+    if(!password){
+        $('.warning').css('display','block');
+        $('.warning').html('密码不能为空');
+        return
+    }
+    if(!validate_code){
+        $('.warning').css('display','block');
+        $('.warning').html('验证码不能为空');
+        return
+    }
+
+    $.ajax({
+        type: "POST",
+        url: '/service/login',
+        dataType: 'json',
+        cache: false,
+        data: {username:username, password: password,validate_code: validate_code, _token: "{{csrf_token()}}"},
+        success:function (data) {
+            if(!data){
+                $('.warning').css('display','block');
+                $('.warning').html('服务端错误');
+                return
+            }
+            if(data.status != 0) {
+                $('.warning').css('display','block');
+                $('.warning').html(data.message);
+                return;
+            }
+            $('.warning').html('登陆成功');
+            location.href = "/"
+        }
+    })
 })
 </script>
 </body>

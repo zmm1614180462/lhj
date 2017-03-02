@@ -19,7 +19,7 @@
             <a rel="nofollow" href="javascript:;">Select Region</a>
         </div>
         <div class="topbar-cart" id="J_miniCartTrigger">
-            <a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href=""><i class="iconfont"></i>购物车<span class="cart-mini-num J_cartNum">（0）</span></a>
+            <a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="{{url('cart')}}"><i class="iconfont"></i>购物车<span class="cart-mini-num J_cartNum">（0）</span></a>
             <div class="cart-menu" id="J_miniCartMenu" style="display: none;"><div class="loading"><div class="loader"></div></div></div>
         </div>
         <div class="topbar-info" id="J_userInfo">
@@ -30,7 +30,7 @@
             @endif
             @if(!Session::get('member'))
                     <a rel="nofollow" class="link" href="{{url('login')}}">登录</a><span class="sep">|</span>
-                    <a rel="nofollow" class="link" href="{{url('')}}">注册</a>
+                    <a rel="nofollow" class="link" href="{{url('register')}}">注册</a>
             @endif
             <span class="sep">|</span><span class="message"><a rel="nofollow" href="javascript:;">消息通知<i class="J_miMessageTotal"></i></a></span></div>
     </div>
@@ -38,7 +38,7 @@
 <div class="site-header">
     <div class="container">
         <div class="header-logo">
-            <a class="logo ir" href="{{url('/')}}" title="小米官网">毕业论文</a>
+            <a class="logo ir" href="{{url('/')}}" title="lhj">毕业论文</a>
             <div class="doodle" style="display: block;"><a class="link-block" style="background-image:url(http://c1.mifile.cn/f/i/g/2015/gif/yybjb.gif)" href="{{url('/')}}" target="_blank"></a></div></div>
         <div class="header-nav">
             <ul class="nav-list"></ul>
