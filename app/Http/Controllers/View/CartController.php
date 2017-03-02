@@ -36,7 +36,7 @@ class CartController extends Controller
       }
     }
 
-    return view('cart')->with('cart_items', $cart_items);
+    return view('mi/cart')->with('cart_items', $cart_items);
   }
 
   private function syncCart($member_id, $bk_cart_arr)
