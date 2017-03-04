@@ -9,7 +9,6 @@ use App\Entity\Product;
 use App\Entity\Order;
 use App\Entity\OrderItem;
 use App\Models\BKWXJsConfig;
-use App\Tool\WXpay\WXTool;
 use Log;
 
 class OrderController extends Controller
@@ -77,7 +76,7 @@ class OrderController extends Controller
         $order_item->product = json_decode($order_item->pdt_snapshot);
       }
     }
-
+    //return $orders;
     return view('order_list')->with('orders', $orders);
   }
 }

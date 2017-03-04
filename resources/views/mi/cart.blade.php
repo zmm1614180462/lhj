@@ -4,19 +4,23 @@
     <meta charset="UTF-8">
     <title>我的购物车</title>
     <meta name="viewport" content="width=1226">
+
     <link rel="stylesheet" href="//s01.mifile.cn/css/base.min.css?v2017a13">
     <link rel="stylesheet" type="text/css" href="//s01.mifile.cn/css/cart.min.css?39656a">
+    <link rel="stylesheet" href="{{url('alert/zeroModal.css')}}">
+    <script src="{{url('js/jquery-1.11.2.min.js')}}"></script>
+    <script src="{{url('alert/zeroModal.min.js')}}"></script>
 </head>
 <body>
 <div class="site-header site-mini-header">
     <div class="container">
         <div class="header-logo">
-            <a class="logo ir" href="{{url('/')}}">小米官网</a>
+            <a class="logo ir" href="{{url('/')}}">主页</a>
         </div>
         <div class="header-title has-more" id="J_miniHeaderTitle"><h2>我的购物车</h2><p>温馨提示：产品是否购买成功，以最终下单为准哦，请尽快结算</p></div>
         <div class="topbar-info" id="J_userInfo">
             <span class="user"><a rel="nofollow" class="user-name" href="javascript:;">
-                    <span class="name">266819505</span>
+                    <span class="name">{{Session::get('member')->nickname}}</span>
                     <i class="iconfont"></i></a>
                 <ul class="user-menu">
                     <li><a rel="nofollow" href="javascript:;">个人中心</a></li>
@@ -52,56 +56,57 @@
                     <div class="col col-action">操作</div>
                 </div>
                 <div class="list-body" id="J_cartListBody">
+                    @foreach($cart_items as $item)
                     <div class="item-box">
                         <div class="item-table J_cartGoods">
                             <div class="item-row clearfix">
                                 <div class="col col-check">
-                                    <i class="iconfont icon-checkbox icon-checkbox-selected J_itemCheckbox" data-itemid="2162900002_0_buy" data-status="1">√</i>
+                                    <i class="iconfont icon-checkbox icon-checkbox-selected J_itemCheckbox" data-id="{{$item->product_id}}" data-price="{{($item->product->price)*($item->count)}}"  data-status="1">√</i>
                                 </div>
                                 <div class="col col-img">
-                                    <a href="//item.mi.com/1162900002.html" target="_blank">
-                                        <img alt="" src="//i1.mifile.cn/a1/pms_1469583247.6157588!80x80.jpg" width="80" height="80">
+                                    <a href="javascript:;" target="_blank">
+                                        <img alt="" src="{{$item->product->preview}}" width="80" height="80">
                                     </a>
                                 </div>
                                 <div class="col col-name">
                                     <div class="tags"></div>
                                     <h3 class="name">
-                                        <a href="javascript:;" target="_blank"> 小米笔记本Air 13.3英寸 银色
+                                        <a href="javascript:;" target="_blank">{{$item->product->name}}
                                         </a>
                                     </h3>
                                 </div>
-                                <div class="col col-price"> 4999元 </div>
+                                <div class="col col-price"> {{$item->product->price}} 元</div>
                                 <div class="col col-num">
                                     <div class="change-goods-num clearfix J_changeGoodsNum">
                                         <a href="javascript:void(0)" class="J_minus">
                                             <i class="iconfont"></i>
                                         </a>
-                                        <input tyep="text" name="2162900002_0_buy" value="1" data-num="1" data-buylimit="20" autocomplete="off" class="goods-num J_goodsNum">
+                                        <input tyep="text" name="{{$item->product_id}}" value="{{$item->count}}" data-num="{{$item->count}}" data-buylimit="20" autocomplete="off" class="goods-num J_goodsNum">
                                         <a href="javascript:void(0)" class="J_plus"><i class="iconfont"></i></a>
                                     </div>
                                 </div>
-                                <div class="col col-total"> 4999元 <p class="pre-info">  </p>
+                                <div class="col col-total price" data-price="{{($item->product->price)*($item->count)}}"> {{($item->product->price)*($item->count)}}元 <p class="pre-info">  </p>
                                 </div>
                                 <div class="col col-action">
-                                    <a id="2162900002_0_buy" data-msg="确定删除吗？" href="javascript:void(0);" title="删除" class="del J_delGoods"><i class="iconfont"></i></a>
+                                    <a id="{{$item->product_id}}" data-msg="确定删除吗？" href="javascript:void(0);" title="删除" class="del J_delGoods" onclick="delGoods({{$item->product_id}})"><i class="iconfont"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
             </div>
             <!-- 加价购 -->
             <div class="raise-buy-box" id="J_raiseBuyBox"> </div>
 
             <div class="cart-bar clearfix cart-bar-fixed" id="J_cartBar">
-                <div class="section-left">
-                    <a href="{{url('/')}}">继续购物</a>
-                    <span class="cart-total">共 <i id="J_cartTotalNum">1</i> 件商品，已选择 <i id="J_selTotalNum">1</i> 件</span>
+                <div class="section-left ">
+                    <a class="btn btn-a btn btn-primary" href="{{url('/')}}">继续购物</a>
                 </div>
                 <span class="total-price">
-                    合计（不含运费）：<em id="J_cartTotalPrice">4999.00</em>元
+                    合计：<em id="J_cartTotalPrice"></em>元
                 </span>
-                <a href="javascript:void(0);" class="btn btn-a btn btn-primary" id="J_goCheckout">去结算</a>
+                <a href="javascript:;" onclick="sumbit()" class="btn btn-a btn btn-primary" id="J_goCheckout">去结算</a>
 
                 <div class="no-select-tip hide" id="J_noSelectTip">
                     请勾选需要结算的商品
@@ -141,9 +146,70 @@
     </div>
 </div>
 
-
 <!--结算提示 -->
+<script>
+    function AllPrice() {
+        var price =0;
+        $('.price').each(function (index,arr) {
+            price = price+parseInt($(this).attr('data-price'))
+        })
+        $('#J_cartTotalPrice').html(price)
+    }
+    AllPrice();
+    //删除物品
+    function delGoods(id) {
+        var product_ids_arr = [];
+        product_ids_arr.push(id)
+        zeroModal.confirm('确认删除该物品么?',function () {
+            $.ajax({
+                type: "GET",
+                url: '/service/cart/delete',
+                dataType: 'json',
+                cache: false,
+                data: {product_ids: product_ids_arr+''},
+                success: function(data) {
+                    if(data == null) {
+                        zeroModal.error('服务端错误!',function () {
 
+                        });
+                        return;
+                    }
+                    if(data.status != 0) {
+                        zeroModal.success('操作成功!')
+                        return ;
+                    }
+
+                    location.reload();
+                },
+
+            });
+        })
+    }
+
+    //点选商品
+    $(".J_itemCheckbox").on('click',function () {
+        var g_price = parseInt($(this).attr('data-price'))
+        if($(this).hasClass('icon-checkbox-selected')){
+            $(this).removeClass('icon-checkbox-selected')
+            $('#J_cartTotalPrice').html(parseInt($('#J_cartTotalPrice').html())-g_price)
+        }else {
+            $(this).addClass('icon-checkbox-selected')
+            $('#J_cartTotalPrice').html(parseInt($('#J_cartTotalPrice').html())+g_price)
+        }
+    })
+    //提交订单
+    function sumbit() {
+        var product_ids_arr = [];
+        $(".J_itemCheckbox").each(function (index) {
+            if($(this).hasClass('icon-checkbox-selected')){
+                product_ids_arr.push($(this).attr('data-id'))
+            }
+        });
+
+        location.href = '/order_commit?product_ids=' + product_ids_arr;
+    }
+
+</script>
 
 
 

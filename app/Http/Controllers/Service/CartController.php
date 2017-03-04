@@ -70,7 +70,7 @@ class CartController extends Controller
     $product_ids = $request->input('product_ids', '');
     if($product_ids == '') {
       $m3_result->status = 1;
-      $m3_result->message = '书籍ID为空';
+      $m3_result->message = '产品ID为空';
       return $m3_result->toJson();
     }
     $product_ids_arr = explode(',', $product_ids);

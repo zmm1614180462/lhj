@@ -21,7 +21,7 @@ Route::get('/register', 'View\MemberController@toRegister');
 Route::get('/product/category_id/{category_id}', 'View\BookController@toProduct');
 Route::get('/product/{product_id}', 'View\BookController@toPdtContent');
 //'middleware'=>'check.cart'
-Route::get('/cart','View\CartController@toCart')->middleware('check.cart');
+Route::get('/cart','View\CartController@toCart');
 
 Route::group(['prefix' => 'service'], function () {
   Route::get('validate_code/create', 'Service\ValidateController@create');

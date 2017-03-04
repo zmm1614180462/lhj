@@ -13,30 +13,30 @@ class CartController extends Controller
 {
   public function toCart(Request $request)
   {
-//    $cart_items = array();
-//
-//    $bk_cart = $request->cookie('bk_cart');
-//    $bk_cart_arr = ($bk_cart!=null ? explode(',', $bk_cart) : array());
-//
-//    $member = $request->session()->get('member', '');
-//    if($member != '') {
-//      $cart_items = $this->syncCart($member->id, $bk_cart_arr);
-//      return response()->view('cart', ['cart_items' => $cart_items])->withCookie('bk_cart', null);
-//    }
-//
-//    foreach ($bk_cart_arr as $key => $value) {
-//      $index = strpos($value, ':');
-//      $cart_item = new CartItem;
-//      $cart_item->id = $key;
-//      $cart_item->product_id = substr($value, 0, $index);
-//      $cart_item->count = (int) substr($value, $index+1);
-//      $cart_item->product = Product::find($cart_item->product_id);
-//      if($cart_item->product != null) {
-//        array_push($cart_items, $cart_item);
-//      }
-//    }
+    $cart_items = array();
 
-    return view('mi/cart');
+    $bk_cart = $request->cookie('bk_cart');
+    $bk_cart_arr = ($bk_cart!=null ? explode(',', $bk_cart) : array());
+
+    $member = $request->session()->get('member', '');
+    if($member != '') {
+      $cart_items = $this->syncCart($member->id, $bk_cart_arr);
+      return response()->view('mi/cart', ['cart_items' => $cart_items])->withCookie('bk_cart', null);
+    }
+
+    foreach ($bk_cart_arr as $key => $value) {
+      $index = strpos($value, ':');
+      $cart_item = new CartItem;
+      $cart_item->id = $key;
+      $cart_item->product_id = substr($value, 0, $index);
+      $cart_item->count = (int) substr($value, $index+1);
+      $cart_item->product = Product::find($cart_item->product_id);
+      if($cart_item->product != null) {
+        array_push($cart_items, $cart_item);
+      }
+    }
+
+    return view('mi/cart')->with('cart_items', $cart_items);
   }
 
   private function syncCart($member_id, $bk_cart_arr)
