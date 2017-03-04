@@ -1,7 +1,7 @@
 @extends('admin.master')
 
 @section('content')
-  <link href="/public/admin/css/H-ui.login.css" rel="stylesheet" type="text/css" />
+  <link href="{{url("admin/css/H-ui.login.css")}}" rel="stylesheet" type="text/css" />
 
   <div class=""></div>
   <div class="loginWraper">

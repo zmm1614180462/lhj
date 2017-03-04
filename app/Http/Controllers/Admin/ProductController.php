@@ -40,7 +40,10 @@ class ProductController extends Controller
   }
 
   public function toProductAdd() {
-    $categories = Category::whereNotNull('parent_id')->get();
+      //二级分类  暂时保留
+    //$categories = Category::whereNotNull('parent_id')->get();
+    $categories = Category::all();
+    //return $categories;
 
     return view('admin.product_add')->with('categories', $categories);
   }

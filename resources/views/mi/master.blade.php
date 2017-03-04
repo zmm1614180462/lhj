@@ -8,8 +8,9 @@
     <meta http-equiv="Cache-Control" content="no-transform ">
     <meta http-equiv="Cache-Control" content="no-siteapp">
     @yield('css')
-    <link rel="stylesheet" href="//s01.mifile.cn/css/base.min.css?v2017a13">
+    <link rel="stylesheet" href="{{url('css/mi_master.css')}}">
     <link rel="stylesheet" href="//s01.mifile.cn/css/index.min.css?d1fe60">
+
 </head>
 
 <body>
@@ -99,7 +100,7 @@
             <dl class="col-links ">
                 <dt>线下门店</dt>
 
-                <dd><a rel="nofollow" href="javascript:;">小米之家</a></dd>
+                <dd><a rel="nofollow" href="javascript:;">网站之家</a></dd>
 
                 <dd><a rel="nofollow" href="javascript:;">服务网点</a></dd>
 
@@ -108,11 +109,11 @@
             </dl>
 
             <dl class="col-links ">
-                <dt>关于小米</dt>
+                <dt>关于网站</dt>
 
-                <dd><a rel="nofollow" href="javascript:;">了解小米</a></dd>
+                <dd><a rel="nofollow" href="javascript:;">了解网站</a></dd>
 
-                <dd><a rel="nofollow" href="javascript:;">加入小米</a></dd>
+                <dd><a rel="nofollow" href="javascript:;">加入网站</a></dd>
 
                 <dd><a rel="nofollow" href="javascript:;">联系我们</a></dd>
 
@@ -123,7 +124,7 @@
 
                 <dd><a rel="nofollow" href="javascript:;">新浪微博</a></dd>
 
-                <dd><a rel="nofollow" href="javascript:;">小米部落</a></dd>
+                <dd><a rel="nofollow" href="javascript:;">网站部落</a></dd>
 
                 <dd><a rel="nofollow" href="javascript:;">官方微信</a></dd>
 
@@ -151,6 +152,15 @@
 
 </div>
 </body>
-<script src="/public/js/jquery-1.11.2.min.js"></script>
+<script src="{{url('js/jquery-1.11.2.min.js')}}"></script>
 @yield('my-js')
+<style>
+
+    .site-header .logo:before {
+        opacity: 1;
+        filter: alpha(opacity=100)\9;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+</style>
 </html>

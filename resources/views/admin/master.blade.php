@@ -9,15 +9,15 @@
   <LINK rel="Bookmark" href="/favicon.ico" >
   <LINK rel="Shortcut Icon" href="/favicon.ico" />
   <!--[if lt IE 9]>
-  <script type="text/javascript" src="/public/lib/html5.js"></script>
+  <script type="text/javascript" src="lib/html5.js"></script>
   <script type="text/javascript" src="lib/respond.min.js"></script>
   <script type="text/javascript" src="lib/PIE_IE678.js"></script>
   <![endif]-->
-  <link href="/public/admin/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-  <link href="/public/admin/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-  <link href="/public/admin/lib/Hui-iconfont/1.0.6/iconfont.css" rel="stylesheet" type="text/css" />
-  <link href="/public/admin/skin/default/skin.css" rel="stylesheet" type="text/css" id="skin" />
-  <link href="/public/admin/css/style.css" rel="stylesheet" type="text/css" />
+  <link href="/admin/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+  <link href="/admin/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+  <link href="/admin/lib/Hui-iconfont/1.0.6/iconfont.css" rel="stylesheet" type="text/css" />
+  <link href="/admin/skin/default/skin.css" rel="stylesheet" type="text/css" id="skin" />
+  <link href="/admin/css/style.css" rel="stylesheet" type="text/css" />
   <!--[if IE 6]>
   <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
   <script>DD_belatedPNG.fix('*');</script>
@@ -30,16 +30,16 @@
 
 @yield('content')
 
-<script type="text/javascript" src="/public/admin/lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="/public/admin/js/jquery.form.js"></script>
-<script type="text/javascript" src="/public/admin/js/uploadFile.js"></script>
-<script type="text/javascript" src="/public/admin/lib/layer/2.1/layer.js"></script>
-<script type="text/javascript" src="/public/admin/js/H-ui.js"></script>
-<script type="text/javascript" src="/public/admin/js/H-ui.admin.js"></script>
-<script type="text/javascript" src="/public/admin/lib/Validform/5.3.2/Validform.min.js"></script>
-<script type="text/javascript" src="/public/admin/lib/ueditor/1.4.3/ueditor.config.js"></script>
-<script type="text/javascript" src="/public/admin/lib/ueditor/1.4.3/ueditor.all.min.js"> </script>
-<script type="text/javascript" src="/public/admin/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" src="/admin/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/admin/js/jquery.form.js"></script>
+<script type="text/javascript" src="/admin/js/uploadFile.js"></script>
+<script type="text/javascript" src="/admin/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="/admin/js/H-ui.js"></script>
+<script type="text/javascript" src="/admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="/admin/lib/Validform/5.3.2/Validform.min.js"></script>
+<script type="text/javascript" src="/admin/lib/ueditor/1.4.3/ueditor.config.js"></script>
+<script type="text/javascript" src="/admin/lib/ueditor/1.4.3/ueditor.all.min.js"> </script>
+<script type="text/javascript" src="/admin/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 @yield('my-js')
 </body>
 </html>

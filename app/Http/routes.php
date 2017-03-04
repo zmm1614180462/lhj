@@ -10,13 +10,10 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/','View\IndexController@index');
 Route::get('/category', function () {
     return view('mi/category');
 });
-
 Route::get('/login', 'View\MemberController@toLogin');
 Route::get('/register', 'View\MemberController@toRegister');
 
@@ -59,12 +56,15 @@ Route::group(['prefix' => 'admin'], function () {
       Route::post('category/del', 'Admin\CategoryController@categoryDel');
       Route::post('category/edit', 'Admin\CategoryController@categoryEdit');
 
+      //产品管理
       Route::post('product/add', 'Admin\ProductController@productAdd');
       Route::post('product/del', 'Admin\ProductController@productDel');
       Route::post('product/edit', 'Admin\ProductController@productEdit');
 
-      Route::post('member/edit', 'Admin\MemberController@memberEdit');
 
+      //修改后台密码
+      Route::post('member/edit', 'Admin\MemberController@memberEdit');
+      //订单处理
       Route::post('order/edit', 'Admin\OrderController@orderEdit');
     });
 
