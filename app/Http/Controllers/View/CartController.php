@@ -16,11 +16,17 @@ class CartController extends Controller
     $cart_items = array();
 
     $bk_cart = $request->cookie('bk_cart');
-    $bk_cart_arr = ($bk_cart!=null ? explode(',', $bk_cart) : array());
 
+    $bk_cart_arr = ($bk_cart!=null ? explode(',', $bk_cart) : array());
     $member = $request->session()->get('member', '');
     if($member != '') {
       $cart_items = $this->syncCart($member->id, $bk_cart_arr);
+//      foreach ($cart_items as $item){
+//          return $item->product->id;
+//      }
+//      return $cart_items;
+//     return $cart_items[0].'<br>'.$cart_items[1].'<br>';
+//        return view('mi/cart')->with('cart_items', $cart_items)->withCookie('bk_cart', null);
       return response()->view('mi/cart', ['cart_items' => $cart_items])->withCookie('bk_cart', null);
     }
 

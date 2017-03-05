@@ -78,7 +78,7 @@
                     <div class="box-hd">
                         <h2 class="title">{{$item->name}}</h2>
                         <div class="more J_brickNav">
-                            <a class="more-link" href="//www.mi.com/smart/" target="_blank">
+                            <a class="more-link" href="javascript:;" target="_blank">
                                 查看全部<i class="iconfont"></i>
                             </a>
                         </div>
@@ -100,11 +100,11 @@
                                     @foreach($item->data as $list)
                                         <li class="brick-item brick-item-m brick-item-m-2">
                                             <div class="figure figure-img">
-                                                <a href="//www.mi.com/mivr/">
+                                                <a href="javascript:;" onclick="addCar({{$list->id}})">
                                                     <img src="{{$list->preview}}"
-                                                         width="160" height="160" alt="小米VR眼镜"> </a>
+                                                         width="160" height="160" alt=""> </a>
                                             </div>
-                                            <h3 class="title"><a href="//www.mi.com/mivr/" data-stat-aid="AA15096"
+                                            <h3 class="title"><a href="javascript:;" data-stat-aid="AA15096"
                                                                  target="_blank">{{$list->name}}</a>
                                             </h3>
                                             <p class="desc">{{$list->summary}}</p>
@@ -122,7 +122,19 @@
 @endsection
 @section('my-js')
     <script>
-        $()
+        function addCar(productId)
+        {
+            $.ajax({
+                type: "GET",
+                url: '/service/cart/add/'+productId,
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    zeroModal.success(data.message)
+                }
+            })
+
+        }
     </script>
 @endsection
 

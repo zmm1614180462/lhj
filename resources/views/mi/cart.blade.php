@@ -20,7 +20,10 @@
         <div class="header-title has-more" id="J_miniHeaderTitle"><h2>我的购物车</h2><p>温馨提示：产品是否购买成功，以最终下单为准哦，请尽快结算</p></div>
         <div class="topbar-info" id="J_userInfo">
             <span class="user"><a rel="nofollow" class="user-name" href="javascript:;">
-                    <span class="name">{{Session::get('member')->nickname}}</span>
+                    @if(Session::get('member'))
+                        <span class="name">{{Session::get('member')->nickname}}</span>
+                    @endif
+
                     <i class="iconfont"></i></a>
                 <ul class="user-menu">
                     <li><a rel="nofollow" href="javascript:;">个人中心</a></li>
@@ -56,12 +59,13 @@
                     <div class="col col-action">操作</div>
                 </div>
                 <div class="list-body" id="J_cartListBody">
+                    @if($cart_items)
                     @foreach($cart_items as $item)
                     <div class="item-box">
                         <div class="item-table J_cartGoods">
                             <div class="item-row clearfix">
                                 <div class="col col-check">
-                                    <i class="iconfont icon-checkbox icon-checkbox-selected J_itemCheckbox" data-id="{{$item->product_id}}" data-price="{{($item->product->price)*($item->count)}}"  data-status="1">√</i>
+                                    <i class="iconfont icon-checkbox icon-checkbox-selected J_itemCheckbox" data-id="{{$item->product->id}}" data-price="{{($item->product->price)*($item->count)}}"  data-status="1">√</i>
                                 </div>
                                 <div class="col col-img">
                                     <a href="javascript:;" target="_blank">
@@ -94,6 +98,10 @@
                         </div>
                     </div>
                     @endforeach
+                    @endif
+                    @if(!$cart_items)
+                        购物车空的
+                    @endif
                 </div>
             </div>
             <!-- 加价购 -->
@@ -205,8 +213,30 @@
                 product_ids_arr.push($(this).attr('data-id'))
             }
         });
+        if(product_ids_arr.length==0){
 
-        location.href = '/order_commit?product_ids=' + product_ids_arr;
+        }
+        $.ajax({
+            type: "GET",
+            dataType:'json',
+            url: '/order_commit?product_ids=' + product_ids_arr,
+            success: function(data) {
+                if(data.status==0){
+                    zeroModal.success({
+                        content:data.message,
+                        okFn:function () {
+                            location.href = '/order_list'
+                        }
+                    })
+                }
+                else {
+                    zeroModal.error(data.message)
+                }
+
+
+            }
+
+        });
     }
 
 </script>

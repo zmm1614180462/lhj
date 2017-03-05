@@ -10,6 +10,9 @@
     @yield('css')
     <link rel="stylesheet" href="{{url('css/mi_master.css')}}">
     <link rel="stylesheet" href="//s01.mifile.cn/css/index.min.css?d1fe60">
+    <link rel="stylesheet" href="{{url('alert/zeroModal.css')}}">
+    <script src="{{url('js/jquery-1.11.2.min.js')}}"></script>
+    <script src="{{url('alert/zeroModal.min.js')}}"></script>
 
 </head>
 

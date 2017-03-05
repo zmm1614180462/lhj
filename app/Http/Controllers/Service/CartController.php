@@ -6,11 +6,19 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\M3Result;
 use App\Entity\CartItem;
+use App\Entity\Product;
 
 class CartController extends Controller
 {
   public function addCart(Request $request, $product_id)
+
   {
+    if(!Product::find($product_id)){
+        $m3_result = new M3Result;
+        $m3_result->status = 1;
+        $m3_result->message = '添加失败';
+        return $m3_result->toJson();
+    }
     $m3_result = new M3Result;
     $m3_result->status = 0;
     $m3_result->message = '添加成功';
@@ -43,6 +51,7 @@ class CartController extends Controller
 
     $bk_cart = $request->cookie('bk_cart');
     $bk_cart_arr = ($bk_cart!=null ? explode(',', $bk_cart) : array());
+
 
     $count = 1;
     foreach ($bk_cart_arr as &$value) {   // 一定要传引用

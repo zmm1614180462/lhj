@@ -65,5 +65,50 @@
     });
     layer.full(index);
   }
+
+  function product_del(name, id) {
+      layer.confirm('确认要删除【' + name +'】吗？',function(index){
+          //此处请求后台程序，下方是成功后的前台处理……
+          $.ajax({
+              type: 'post', // 提交方式 get/post
+              url: '/admin/service/product/del', // 需要提交的 url
+              dataType: 'json',
+              data: {
+                  id: id,
+                  _token: "{{csrf_token()}}"
+              },
+              success: function(data) {
+                  if(data == null) {
+                      layer.msg('服务端错误', {icon:2, time:2000});
+                      return;
+                  }
+                  if(data.status != 0) {
+                      layer.msg(data.message, {icon:2, time:2000});
+                      return;
+                  }
+
+                  layer.msg(data.message, {icon:1, time:2000});
+                  location.replace(location.href);
+              },
+              error: function(xhr, status, error) {
+                  console.log(xhr);
+                  console.log(status);
+                  console.log(error);
+                  layer.msg('ajax error', {icon:2, time:2000});
+              },
+              beforeSend: function(xhr){
+                  layer.load(0, {shade: false});
+              }
+          });
+      });
+  }
+  function product_edit(title, url) {
+      var index = layer.open({
+          type: 2,
+          title: title,
+          content: url
+      });
+      layer.full(index);
+  }
 </script>
 @endsection

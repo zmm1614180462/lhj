@@ -8,7 +8,7 @@ use App\Entity\CartItem;
 use App\Entity\Product;
 use App\Entity\Order;
 use App\Entity\OrderItem;
-use App\Models\BKWXJsConfig;
+use App\Models\M3Result;
 use Log;
 
 class OrderController extends Controller
@@ -57,12 +57,16 @@ class OrderController extends Controller
     $order->save();
 
 
+      $m3_result = new M3Result;
+      $m3_result->status = 0;
+      $m3_result->message = '订单生成成功';
 
-    return view('order_commit')->with('cart_items', $cart_items_arr)
-                               ->with('total_price', $total_price)
-                               ->with('name', $name)
-                               ->with('order_no', $order->order_no)
-                               ;
+      return $m3_result->toJson();
+//    return view('order_commit')->with('cart_items', $cart_items_arr)
+//                               ->with('total_price', $total_price)
+//                               ->with('name', $name)
+//                               ->with('order_no', $order->order_no)
+//                               ;
   }
 
   public function toOrderList(Request $request)

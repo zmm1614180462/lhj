@@ -32,7 +32,8 @@ Route::group(['prefix' => 'service'], function () {
   Route::any('logout', 'Service\MemberController@logout');
 
   Route::get('category/parent_id/{parent_id}', 'Service\BookController@getCategoryByParentId');
-  Route::get('cart/add/{product_id}', 'Service\CartController@addCart');
+  Route::get('cart/add/{product_id}', 'Service\CartController@addCart')
+                ->where('product_id','^\d{1,8}$');
   Route::get('cart/delete', 'Service\CartController@deleteCart');
 
 });
